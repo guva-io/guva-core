@@ -11,7 +11,7 @@ interface IMiner {
 
 // Forward declaration of the GuvaNFT contract interface
 interface IGuvaNFT is IERC721 {
-    function rent() external view returns (uint256);
+    function rentOf(uint256 tokenId_) external view returns (uint256);
 }
 
 // Forward declaration of the Workflow contract interface
@@ -67,7 +67,7 @@ contract Bank {
     }
 
     function spend(address fromAddress_, uint256 nftTokenId_, uint256 workflowIndex_) public onlyMiner {
-        uint256 nftRent = guvaNFT.rent();
+        uint256 nftRent = guvaNFT.rentOf(nftTokenId_);
         uint256 workflowRent = workflowContract.rentOf(workflowIndex_);
         uint256 totalRent = nftRent + workflowRent;
 
